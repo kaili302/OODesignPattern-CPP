@@ -14,34 +14,39 @@ instead of creating a new one. The getPresident() method will make sure there is
 #include <iostream>
 #include <string>
 
-/** .hpp */
+
 class President{
 private:
-	static President m_president;
+	static President* m_pPresident;
 	President () {}
+	~President () {
+		if (m_pPresident) delete m_pPresident;
+	}
+
 
 public:
-	static President& getPresident();
+	static President* instance();
 
 	void giveOrder();
 };
 
-/* .cpp */
-President President::m_president{};
+President* President::m_pPresident = nullptr;
 
-President& President::getPresident(){
-	return m_president;
+President* President::instance(){
+	if (!m_pPresident) {
+		m_pPresident = new President{};
+	}
+	return m_pPresident;
 }
 
 void President::giveOrder(){
-	std::cout << "Protect our country!" << std::endl;
+	std::cout << "Change the medical system!" << std::endl;
 }
-
 
 
 /* main */
 int main(){
-	President::getPresident().giveOrder();
+	President::instance()->giveOrder();
 }
 
 
