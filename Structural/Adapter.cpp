@@ -4,9 +4,6 @@ This is the first design pattern that I used in pratice. When I developed an And
 
 Adapter pattern is frequently used in modern Java frameworks.
 It comes into place when you want to use an existing class, and its interface does not match the one you need, or you want to create a reusable class that cooperates with unrelated classes with incompatible interfaces.
-1. Adapter pattern story
-The Adapter idea can be demonstrated with the following simple example. The purpose of the sample problem is to adapt an orange as an apple.
-
 */
 
 /* 
