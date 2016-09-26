@@ -5,8 +5,8 @@ if we ask for apple juice, the factory will produce apple juice. Based on differ
 */
 
 
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 
 class Juice{
 public:
@@ -73,8 +73,8 @@ Juice* JuiceFactory::makeJuice(std::string fruit){
 
 int main(){
 	// make orane juice
-	Juice *pOrangeJuice = JuiceFactory::instance()->makeJuice("orange");
-	Juice *pAppleJuice  = JuiceFactory::instance()->makeJuice("apple"); 
+	Juice* pOrangeJuice = JuiceFactory::instance()->makeJuice("orange");
+	Juice* pAppleJuice  = JuiceFactory::instance()->makeJuice("apple"); 
 
 	pOrangeJuice->print();
 	pAppleJuice->print();	
