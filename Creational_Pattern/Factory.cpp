@@ -87,25 +87,103 @@ int main(){
 
 
 
+class Human{
+public:
+	virtual void print() = 0;
+};
+
+class Man : public Human{
+public:
+	virtual void print();
+};
+
+void Man::print(){
+	cout << "I'm a man" << endl;
+}
+
+class Woman : public Human{
+public:
+	virtual void print();
+};
+
+void Woman::print(){
+	cout << "I'm a woman" << endl;
+}
+
+class HumanFactory{
+private:
+	static HumanFactory* instance;
+	HumanFactory(){}
+
+public:
+	static HumanFactory* getInstance();
+
+	Human* createHuman(string gender);
+};
+
+HumanFactory* HumanFactory::instance = nullptr;
+
+HumanFactory* HumanFactory::getInstance(){
+	if (instance == nullptr){
+		instance = new HumanFactory;
+	}
+	return instance;
+}
+
+Human* HumanFactory::createHuman(string gender){
+	if (gender == "man")
+		return new Man;
+	else if (gender == "woman")
+		return new Woman;
+	else 
+		return nullptr;
+}
 
 
 
 
+class Animal{
+protected:
+	string m_type;
+public:
+	Animal(string type) : m_type{type}{	}
+	virtual void print() = 0;
+};
 
 
+class Dog: public Animal{
+public:
+	Dog(string type) : Animal{type}{}
+	virtual void print(){
+		cout << "I'm a " << m_type << endl;
+	}
+};
 
+class Cat:public Animal{
+public:
+	Cat(string type) : Animal{type}{}
+	virtual void print(){
+		cout << "I'm a " << m_type << endl;
+	}	
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class AnimalFactory{
+private:
+	static AnimalFactory* instance;
+	AnimalFactory(){}
+public:
+	~AnimalFactory(){ delete instance; }
+	
+	static AnimalFactory* getInstance(){
+		if (!instance)
+			instance = new AnimalFactory;
+		return instance;
+	}
+	Animal* createAnimal(string animal){
+		if (animal == "dog")
+			return new Dog{"dog"};
+		else 
+			return new Cat{"cat"};
+	}
+};
+AnimalFactory* AnimalFactory::instance = nullptr;

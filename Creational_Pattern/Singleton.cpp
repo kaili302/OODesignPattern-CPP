@@ -51,3 +51,55 @@ int main(){
 
 
 
+
+
+
+
+class President{
+private:
+	static President* instance;
+
+	President(){
+	}
+
+public:
+	President* getInstance();
+
+	void giveOrder();
+};
+
+President::instance = nullptr;
+
+President* President::getInstance(){
+	if (instance == nullptr){
+		instance = new President;
+	}
+	return instance;
+}
+
+void President::giveOrder(){
+	cout << "go ahead!!!" << endl;
+}
+
+
+
+// round 3
+class Service{
+private:
+	static Service* instance;
+	Service(){}
+public:
+	static Service* getInstance(){
+		if (!instance)
+			instance = new Service;
+		return instance;
+	}
+
+	void runCmd(string cmd){
+		cout << "run command : " << cmd << endl;
+	}
+};
+Service* Service::instance = nullptr;
+
+
+

@@ -20,6 +20,7 @@ public:
     virtual void on() = 0;
     virtual void off() = 0;
     virtual void changeChanel(int chanel) = 0;
+    virtual void print() = 0;
 };
 
 class SonyTV : public ITV{
@@ -33,7 +34,11 @@ public:
     }
 
     virtual void changeChanel(int chanel){
-	std::cout << "Sony TV is set to chanel : " << chanel << std::endl;
+    std::cout << "Sony TV is set to chanel : " << chanel << std::endl;
+    }
+    
+    virtual void changeChanel(int chanel){
+    std::cout << "Sony TV is set to chanel : " << chanel << std::endl;
     }
 };
 
@@ -102,6 +107,96 @@ int main(){
 	remoteController.turnOffTV();
 }
 
+
+
+
+
+
+class ITV{
+public:
+    virtual void on() = 0;
+    virtual void off() = 0;
+    virtual void setChanel(int chanel) = 0;
+    virtual string toString() = 0;
+};
+
+class AbstractController{
+protected:
+    ITV* m_pTV;
+public:
+    virtual void setTV(ITV* pTV) = 0;
+    virtual void turnOn() = 0;
+    virtual void turnOff() = 0;
+    virtual void change(int chanel) = 0;
+};
+
+
+class SonyTV : public ITV{
+public:
+    virtual void on(){
+        cout << "sony TV is ON" << endl;
+    }
+    virtual void off(){
+        cout << "sony TV is OFF" << endl;
+    }
+    virtual void setChanel(int chanel){
+        cout << "sony TV, set chanel : " << chanel << endl;
+    }
+    virtual string toString(){
+        return "Sony TV";
+    }
+};
+
+class XiaomiTV : public ITV{
+public:
+    virtual void on(){
+        cout << "Xiaomi TV is ON" << endl;
+    }
+    virtual void off(){
+        cout << "Xiaomi TV is OFF" << endl;
+    }
+    virtual void setChanel(int chanel){
+        cout << "Xiaomi TV, set chanel : " << chanel << endl;
+    }  
+    virtual string toString(){
+        return "Xiaomi TV";
+    }
+};
+
+
+class LogitechController : public AbstractController{
+public:
+    virtual void setTV(ITV* pTV) { 
+        cout << "Logitech Controller matches " << pTV->toString() << endl;
+        m_pTV = pTV;
+    }
+    virtual void turnOn(){
+        m_pTV->on();
+    }
+    virtual void turnOff(){
+        m_pTV->off();
+    }
+    virtual void change(int chanel) {
+        m_pTV->setChanel(chanel);
+    }
+};
+
+class AppleController : public AbstractController{
+public:
+    virtual void setTV(ITV* pTV) { 
+        cout << "Apple Controller matches " << pTV->toString() << endl;
+        m_pTV = pTV;
+    }
+    virtual void turnOn(){
+        m_pTV->on();
+    }
+    virtual void turnOff(){
+        m_pTV->off();
+    }
+    virtual void change(int chanel) {
+        m_pTV->setChanel(chanel);
+    }
+};
 
 
 
